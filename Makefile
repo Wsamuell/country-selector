@@ -1,4 +1,4 @@
-project_name = melange-opam-template
+project_name = country-selector
 
 DUNE = opam exec -- dune
 

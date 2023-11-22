@@ -8,6 +8,7 @@ module App = {
     ->Belt.List.toArray
     ->React.array;
 };
+let id: ('a => 'a) = x => x
 
 ReactDOM.querySelector("#root")
 ->(
