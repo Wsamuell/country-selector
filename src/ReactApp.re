@@ -8,7 +8,10 @@ module App = {
     ->Belt.List.toArray
     ->React.array;
 };
-let id: ('a => 'a) = x => x
+// let id: 'a => 'a = x => x;
+// make a simple drop down menu
+// fetch the countries from the api
+// integrate flag and write binding for it
 
 ReactDOM.querySelector("#root")
 ->(

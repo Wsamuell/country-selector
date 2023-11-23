@@ -40,10 +40,10 @@ You can see all available commands by running `make help` or just `make`. Here
 are a few of the most useful ones:
 
 - `make init`: set up opam local switch and download OCaml, Melange and
-JavaScript dependencies
+  JavaScript dependencies
 - `make install`: install OCaml, Melange and JavaScript dependencies
 - `make watch`: watch for the filesystem and have Melange rebuild on every
-change
+  change
 - `make serve`: serve the application with a local HTTP server
 
 ## JavaScript output
@@ -55,6 +55,7 @@ The template includes two `melange.emit` stanza for two separate apps. This
 stanza tells Dune to generate JavaScript files using Melange, and specifies in
 which folder the JavaScript files should be placed, by leveraging the `target`
 field:
+
 - The React app JavaScript files will be placed in `_build/default/src/output/*`.
 - The NodeJS app JavaScript files will be placed in `_build/default/src/node/*`.
 
