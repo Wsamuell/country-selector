@@ -1,18 +1,15 @@
-module App = {
-  // This sample forces an import of Belt.*, so that CI builds can ensure that
-  // Melange has been installed correctly for JS bundlers to be able to find it.
-  [@react.component]
-  let make = () =>
-    ["Hello " ++ World.name ++ "!", "This is React!"]
-    ->Belt.List.map(greeting => <h1> greeting->React.string </h1>)
-    ->Belt.List.toArray
-    ->React.array;
-};
-// let id: 'a => 'a = x => x;
-// make a simple drop down menu
-// fetch the countries from the api
-// integrate flag and write binding for it
+// open ReactSelect;
 
+// let test = Select.make(~multi=false);
+// Js.log(test);
+module App = {
+  [@react.component]
+  let make = () => {
+    <div>
+       {React.string("Hello World")} </div>;
+      // <div> <Select. multi=false /> </div>
+  };
+};
 ReactDOM.querySelector("#root")
 ->(
     fun
