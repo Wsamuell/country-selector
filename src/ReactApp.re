@@ -1,15 +1,17 @@
-// open ReactSelect;
+open ReactSelect;
+open CountryData;
 
-// let test = Select.make(~multi=false);
-// Js.log(test);
+module Styles = {
+  Js.log(Fetcher.api);
+};
+
 module App = {
   [@react.component]
   let make = () => {
-    <div>
-       {React.string("Hello World")} </div>;
-      // <div> <Select. multi=false /> </div>
+    <Select multi=false />;
   };
 };
+
 ReactDOM.querySelector("#root")
 ->(
     fun

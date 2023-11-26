@@ -15,7 +15,7 @@
  ; Dune will look into those dependencies and generate rules with JavaScript targets
  ; for the modules in those libraries as well.
  ; Caveat: the libraries need to be specified with `(modes melange)`.
- (libraries reason-react world melange.belt)
+ (libraries reason-react world melange.belt melange-fetch melange-json)
  ; By default, Dune will include all modules in the folder to the targets. With `modules` field
  ; we can tweak this default behavior by excluding `hello` from the list of targets of this stanza.
  ; See https://dune.readthedocs.io/en/stable/reference/predicate-language.html#predicate-language
@@ -37,3 +37,5 @@
  (libraries world)
  (modules hello)
  (module_systems commonjs))
+
+; check with Paul about why there are two emit stanzas and if i need to att melange__ to both
