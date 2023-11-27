@@ -2,6 +2,14 @@
 [@react.component]
 module Select = {
   [@mel.module "react-select"] [@react.component]
-  external make: (~multi: bool, ~value: Option.t('a)=?) => React.element =
+  external make:
+    (
+      ~multi: bool,
+      ~options: array('a)=?,
+      ~name: string=?,
+      ~noResultsText: string=?,
+      ~placeholder: string=?
+    ) =>
+    React.element =
     "default";
 };
