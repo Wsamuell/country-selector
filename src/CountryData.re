@@ -4,7 +4,6 @@ type item = {
   label: string,
   value: string,
 };
-
 let decodeItem = json => {
   Json.Decode.{
     label: json |> field("label", string),
@@ -12,10 +11,10 @@ let decodeItem = json => {
   };
 };
 
-let fetchCountries: option(array(item)) => array(item) =
+let parseCountry: option(array(item)) => array(item) =
   fun
   | Some(arr) => arr
-  | None => [|{label: "", value: "Loading..."}|];
+  | None => [|{label: "xx", value: "Loading..."}|];
 
 let decode = json =>
   json
