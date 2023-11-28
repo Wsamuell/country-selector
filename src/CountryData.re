@@ -11,10 +11,10 @@ let decodeItem = json => {
   };
 };
 
-let parseCountry: option(array(item)) => array(item) =
+let countryLoadState: option(array(item)) => array(item) =
   fun
   | Some(arr) => arr
-  | None => [|{label: "xx", value: "Loading..."}|];
+  | None => [|{label: "Loading...", value: "xx"}|];
 
 let decode = json =>
   json

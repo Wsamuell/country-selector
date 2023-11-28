@@ -19,7 +19,7 @@
  ; By default, Dune will include all modules in the folder to the targets. With `modules` field
  ; we can tweak this default behavior by excluding `hello` from the list of targets of this stanza.
  ; See https://dune.readthedocs.io/en/stable/reference/predicate-language.html#predicate-language
- (modules :standard \ hello)
+ ; (modules :standard \ hello)
  ; Uncomment the following to copy the generated JavaScript files inside the source tree
  ; (promote (until-clean))
  (preprocess
@@ -31,11 +31,5 @@
  ; https://melange.re/v2.0.0/build-system/#commonjs-or-es6-modules
  (module_systems es6))
 
-(melange.emit
- (target node)
- (alias node)
- (libraries world)
- (modules hello)
- (module_systems commonjs))
 
 ; check with Paul about why there are two emit stanzas and if i need to att melange__ to both
