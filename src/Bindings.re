@@ -1,17 +1,23 @@
 module Select = {
+  type reactSelectComponents = {
+    [@mel.as "Control"]
+    control: React.element,
+    // [@mel.as "Option"]
+    // option: React.element,
+  };
   [@mel.module "react-select"] [@react.component]
   external make:
     (
-      ~arrowRenderer: 'a => React.element=?,
+      ~children: React.element=?,
       ~closeMenuOnSelect: bool=?,
+      ~components: reactSelectComponents=?,
       ~multi: bool,
       ~name: string=?,
       ~noOptionsMessage: 'a => string=?,
       ~onChange: 'a => unit=?,
       ~options: array('a)=?,
       ~placeholder: string=?,
-      ~styles: ReactDOM.Style.t=?,
-      ~wrapperStyle: ReactDOM.Style.t=?
+      ~styles: ReactDOM.Style.t=?
     ) =>
     React.element =
     "default";
@@ -19,5 +25,6 @@ module Select = {
 
 module Flag = {
   [@mel.module "flag-icons"] [@react.component]
-  external make: (~countryCode: string) => React.element = "default";
+  external make: (~countryCode: string, ~className: string=?) => React.element =
+    "default";
 };

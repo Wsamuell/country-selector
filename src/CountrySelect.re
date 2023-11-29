@@ -1,33 +1,21 @@
 open Bindings;
 open CountryData;
 open Icons;
+open SharedStyle;
 
-module Colors = {
-  type color =
-    | Light
-    | Dark
-    | Grey
-    | Primary
-    | Secondary;
-
-  let colorToHex = (color: color) =>
-    switch (color) {
-    | Light => "#FFFFFF"
-    | Dark => "#000000"
-    | Grey => "#E5E5E5"
-    | Primary => "#F2F2F2"
-    | Secondary => "#F2F2F2"
-    };
-};
-let arrowPath = "./arrow.png";
 module Style = {
-  open Colors;
   let wrapper =
-    ReactDOM.Style.make(~width="230px", ~height="429px", ~font="Arial", ());
+    ReactDOM.Style.make(
+      ~width="230px",
+      ~height="429px",
+      ~fontFamily="Arial",
+      ~fontSize="14px",
+      (),
+    );
   let dropdown =
     ReactDOM.Style.make(~width="30%", ~color=colorToHex(Light), ());
   let selectContainer =
-    ReactDOM.Style.make(~paddingTop="4px", ~paddingBottom="4px", ());
+    ReactDOM.Style.make(~paddingTop="4px", ~borderRadius="2px", ());
   let button =
     ReactDOM.Style.make(
       ~display="flex",
@@ -49,10 +37,22 @@ module Style = {
       ~backgroundRepeat="no-repeat",
       (),
     );
-  let arrowFlip = {
+  let icon = {
     ReactDOM.Style.make(~padding="3px", ());
   };
 };
+
+// module Control = {
+//   [@react.component]
+//   let make = (~children: React.element) => {
+//     // Destructure props using the ReasonML syntax
+//     let children: React.element = children;
+
+//     // Render the custom Control component
+//     <div> <span> <Search style=Style.icon /> children </span> </div>;
+//   };
+// };
+// let components: Select.reactSelectComponents = {control: Control.make};
 
 [@react.component]
 let make = () => {
@@ -79,10 +79,10 @@ let make = () => {
   );
   <div style=Style.wrapper>
     <button onClick={_ => setActive(_ => !active)} style=Style.button>
-      // <Flag countryCode={selectedCountry.value} />
+      // <Flag countryCode={selectedCountry.value} className="fib fi" />
 
-        {React.string(selectedCountry.label)}
-        <Arrow style=Style.arrowFlip />
+        <div style=Style.flag> {React.string(selectedCountry.label)} </div>
+        <Arrow style=Style.icon />
       </button>
     {active
      |> (
@@ -90,9 +90,9 @@ let make = () => {
        | true =>
          <div style=Style.selectContainer>
            <Select
-             arrowRenderer={_ => React.null}
              closeMenuOnSelect=true
-             multi=true
+             //  components
+             multi=false
              name="Country Selector"
              noOptionsMessage={_ => "Country Not Found!"}
              onChange={value => {
@@ -102,9 +102,9 @@ let make = () => {
              options=countries
              placeholder="Search"
              styles=Style.dropdown
-             wrapperStyle=Style.dropdown
            />
          </div>
+
        | false => React.null
      )}
   </div>;
