@@ -79,11 +79,10 @@ let make = () => {
   );
   <div style=Style.wrapper>
     <button onClick={_ => setActive(_ => !active)} style=Style.button>
-      // <Flag countryCode={selectedCountry.value} className="fib fi" />
-
-        <div style=Style.flag> {React.string(selectedCountry.label)} </div>
-        <Arrow style=Style.icon />
-      </button>
+      <span className={"fi fi-" ++ selectedCountry.value} />
+      <div style=Style.flag> {React.string(selectedCountry.label)} </div>
+      <Arrow style=Style.icon />
+    </button>
     {active
      |> (
        fun

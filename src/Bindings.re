@@ -22,9 +22,3 @@ module Select = {
     React.element =
     "default";
 };
-
-module Flag = {
-  [@mel.module "flag-icons"] [@react.component]
-  external make: (~countryCode: string, ~className: string=?) => React.element =
-    "default";
-};
