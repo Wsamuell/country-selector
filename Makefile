@@ -23,6 +23,7 @@ install: ## Install development dependencies
 	npm install # install JavaScript packages that the project might depend on, like `react` or `react-dom`
 	opam update # make sure that opam has the latest information about published libraries in the opam repository https://opam.ocaml.org/packages/
 	opam install -y . --deps-only --with-test # install the Melange and OCaml dependencies
+	opam install melange-fetch melange-json
 	opam exec opam-check-npm-deps # check that the versions of the JavaScript packages installed match the requirements defined by Melange libraries
 
 .PHONY: build

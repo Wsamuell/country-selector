@@ -1,11 +1,12 @@
 module Select = {
+  type optionProps = {children: React.element};
   type reactSelectComponents = {
     [@mel.as "DropdownIndicator"]
     dropdownIndicator: unit => React.element,
     [@mel.as "IndicatorSeparator"]
     indicatorSeparator: bool,
-    // [@mel.as "Option"]
-    // option: unit => React.element,
+    [@mel.as "Option"]
+    option: optionProps => React.element,
   };
 
   type styleSelectType = {control: unit => ReactDOMStyle.t};
@@ -14,6 +15,7 @@ module Select = {
     colors: SharedStyle.themeColors,
     spacing: SharedStyle.spacing,
   };
+
   [@mel.module "react-select"] [@react.component]
   external make:
     (

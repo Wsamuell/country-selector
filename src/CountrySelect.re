@@ -29,7 +29,15 @@ module Style = {
       (),
     );
   let flag = ReactDOM.Style.make(~width="14px", ~height="14px", ());
-  let divPad = ReactDOM.Style.make(~padding="4px", ());
+  let divPad =
+    ReactDOM.Style.make(
+      ~padding="4px",
+      ~textOverflow="ellipsis",
+      ~overflow="hidden",
+      ~maxWidth="150px",
+      ~whiteSpace="nowrap",
+      (),
+    );
   let icon = {
     ReactDOM.Style.make(~padding="3px", ());
   };
@@ -91,15 +99,22 @@ module CustomStyle = {
   };
 };
 
-// module Option = {
-//   type data = {label: string, value: string};
-//   [@react.component]
-//   let make = (~prop: data) => {
-//     <div> <span className={"fi fi-" ++ prop.label} />
-//     prop
-//      </div>;
-//   };
-// };
+module Option = {
+  type prop = {
+    children: React.element,
+    // isFocused: bool,
+    // isSelected: bool,
+    label: string,
+    data: item,
+  };
+
+  [@react.component]
+  let make = (~prop: prop) => {
+    <div>
+       <span className={"fi fi-" ++ prop.label} /> </div>;
+      // <div> {React.string(data.label)} </div>
+  };
+};
 
 module Menu = {
   [@react.component]
@@ -163,7 +178,7 @@ let make = () => {
       components={
         dropdownIndicator: _ => <Search />,
         indicatorSeparator: false,
-        // option: _ => <Option> React.null </Control>,
+        option: ({children, _}: Select.optionProps) => <div> children </div>,
       }
       multi=false
       name="Country Selector"
