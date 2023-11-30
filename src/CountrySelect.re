@@ -4,55 +4,122 @@ open Icons;
 open SharedStyle;
 
 module Style = {
-  let wrapper =
+  let dropdown =
     ReactDOM.Style.make(
+      ~position="relative",
       ~width="230px",
       ~height="429px",
       ~fontFamily="Arial",
       ~fontSize="14px",
       (),
     );
-  let dropdown =
-    ReactDOM.Style.make(~width="30%", ~color=colorToHex(Light), ());
-  let selectContainer =
-    ReactDOM.Style.make(~paddingTop="4px", ~borderRadius="2px", ());
   let button =
     ReactDOM.Style.make(
-      ~display="flex",
-      ~height="26px",
-      ~padding="4px 10px",
       ~alignItems="center",
-      ~borderRadius="3px",
-      ~minWidth="141px",
-      ~justifyContent="space-between",
+      ~backgroundColor=colorToHex(Light),
       ~border=
         "1px solid var(--light-border-control-alpha, rgba(0, 0, 0, 0.20))",
-      ~background="#FFFFFF",
+      ~borderRadius="3px",
+      ~columnGap="6px",
+      ~display="flex",
+      ~height="26px",
+      ~justifyContent="space-between",
+      ~minWidth="144px",
+      ~padding="4px 10px",
       (),
     );
-  let flag =
-    ReactDOM.Style.make(
-      ~backgroundSize="contain",
-      ~backgroundPosition="50%",
-      ~backgroundRepeat="no-repeat",
-      (),
-    );
+  let flag = ReactDOM.Style.make(~width="14px", ~height="14px", ());
+  let divPad = ReactDOM.Style.make(~padding="4px", ());
   let icon = {
     ReactDOM.Style.make(~padding="3px", ());
   };
+
+  // Bring back blanket after fixing the dropdown
+  let blanket = {
+    ReactDOM.Style.make// ~top="0",
+                       // ~right="0",
+                       // ~position="fixed",
+                       (); // ~left="0",
+ // ~bottom="0",
+                       // ~zIndex="1",
+  };
+  let menu = {
+    ReactDOM.Style.make(
+      ~backgroundColor=colorToHex(Light),
+      ~marginTop="3px",
+      ~position="absolute",
+      ~zIndex="2",
+      ~width="100%",
+      (),
+    );
+  };
+
+  let theme =
+    ReactDOM.Style.make(
+      ~borderRadius="0px",
+      ~backgroundColor=colorToHex(Dark),
+      (),
+    );
+  let control =
+    ReactDOM.Style.make(~display="flex", ~justifyContent="row-reverse", ());
+};
+module CustomStyle = {
+  open Select;
+  let customStyle = {
+    control: props =>
+      ReactDOMStyle.make(
+        props,
+        ~display="flex",
+        ~flexDirection="row-reverse",
+        ~height="26px",
+        ~alignItems="center",
+        ~padding="0px 10px",
+        ~borderRadius="3px 3px 0px 0px",
+        ~border=
+          "1px solid var(--light-border-control-alpha, rgba(0, 0, 0, 0.20))",
+      ),
+  };
 };
 
-// module Control = {
+// module Option = {
 //   [@react.component]
-//   let make = (~children: React.element) => {
-//     // Destructure props using the ReasonML syntax
-//     let children: React.element = children;
-
-//     // Render the custom Control component
-//     <div> <span> <Search style=Style.icon /> children </span> </div>;
+//   let make = (~data as {label}: CountryData.item) => {
+//     <div> <span className={"fi fi-" ++ label} /> </div>;
 //   };
 // };
-// let components: Select.reactSelectComponents = {control: Control.make};
+// };
+// let components: Select.reactSelectComponents = {control: Dropdown.make};
+
+module Menu = {
+  [@react.component]
+  let make = (~children) => {
+    <div style=Style.menu> children </div>;
+  };
+};
+module Blanket = {
+  [@react.component]
+  let make = (~onClick) => {
+    <div style=Style.blanket onClick />;
+  };
+};
+
+module Control = {
+  [@react.component]
+  let make = (~children) => {
+    <div style=Style.control> children </div>;
+  };
+};
+
+module Dropdown = {
+  [@react.component]
+  let make = (~target, ~children, ~isOpen, ~onClose) => {
+    <div style=Style.dropdown>
+      target
+      {isOpen ? <Menu> children </Menu> : React.null}
+      {isOpen ? <Blanket onClick=onClose /> : React.null}
+    </div>;
+  };
+};
 
 [@react.component]
 let make = () => {
@@ -77,34 +144,38 @@ let make = () => {
     },
     [||],
   );
-  <div style=Style.wrapper>
-    <button onClick={_ => setActive(_ => !active)} style=Style.button>
-      <span className={"fi fi-" ++ selectedCountry.value} />
-      <div style=Style.flag> {React.string(selectedCountry.label)} </div>
-      <Arrow style=Style.icon />
-    </button>
-    {active
-     |> (
-       fun
-       | true =>
-         <div style=Style.selectContainer>
-           <Select
-             closeMenuOnSelect=true
-             //  components
-             multi=false
-             name="Country Selector"
-             noOptionsMessage={_ => "Country Not Found!"}
-             onChange={value => {
-               setSelectedCountry(_ => value);
-               setActive(_ => false);
-             }}
-             options=countries
-             placeholder="Search"
-             styles=Style.dropdown
-           />
-         </div>
-
-       | false => React.null
-     )}
-  </div>;
+  <Dropdown
+    isOpen=active
+    onClose={_ => setActive(_ => false)}
+    target={
+      <button onClick={_ => setActive(prev => !prev)} style=Style.button>
+        <span className={"fi fi-" ++ selectedCountry.value} style=Style.flag />
+        <div style=Style.divPad> {React.string(selectedCountry.label)} </div>
+        <Arrow style=Style.icon />
+      </button>
+    }>
+    <Select
+      closeMenuOnSelect=true
+      components={
+        dropdownIndicator: _ => <Search />,
+        indicatorSeparator: false,
+        // control: <Control> React.null </Control>,
+      }
+      multi=false
+      name="Country Selector"
+      noOptionsMessage={_ => "Country Not Found!"}
+      onChange={value => setSelectedCountry(_ => value)}
+      options=countries
+      autoFocus=true
+      backspaceRemovesValue=false
+      controlShouldRenderValue=false
+      hideSelectedOptions=false
+      isClearable=false
+      menuIsOpen=true
+      placeholder="Search"
+      tabSelectsValue=false
+      styles=CustomStyle.customStyle
+      value={selectedCountry.label}
+    />
+  </Dropdown>;
 };
