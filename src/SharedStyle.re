@@ -6,6 +6,15 @@ type color =
   | Secondary
   | Hover;
 
+type themeColors = {
+  primary: string,
+  primary25: string,
+};
+type spacing = {
+  baseUnit: int,
+  controlHeight: int,
+  menuGutter: int,
+};
 let colorToHex = (color: color) =>
   switch (color) {
   | Light => "#FFFFFF"

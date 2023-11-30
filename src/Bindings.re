@@ -4,11 +4,16 @@ module Select = {
     dropdownIndicator: unit => React.element,
     [@mel.as "IndicatorSeparator"]
     indicatorSeparator: bool,
-    // [@mel.as "Control"]
-    // control: React.element,
+    // [@mel.as "Option"]
+    // option: unit => React.element,
   };
 
   type styleSelectType = {control: unit => ReactDOMStyle.t};
+  type themeSelectType = {
+    borderRadius: string,
+    colors: SharedStyle.themeColors,
+    spacing: SharedStyle.spacing,
+  };
   [@mel.module "react-select"] [@react.component]
   external make:
     (
@@ -29,7 +34,7 @@ module Select = {
       ~placeholder: string=?,
       ~styles: styleSelectType=?,
       ~tabSelectsValue: bool=?,
-      // ~theme: 'a => record=?,
+      ~theme: themeSelectType=?,
       ~value: string=?
     ) =>
     React.element =

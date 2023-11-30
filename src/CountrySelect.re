@@ -36,11 +36,11 @@ module Style = {
 
   // Bring back blanket after fixing the dropdown
   let blanket = {
-    ReactDOM.Style.make// ~top="0",
-                       // ~right="0",
-                       // ~position="fixed",
-                       (); // ~left="0",
- // ~bottom="0",
+    ReactDOM.Style.make// ~position="fixed",
+                       // ~bottom="0",
+                       // ~left="0",
+                       (); // ~right="0",
+ // ~top="0",
                        // ~zIndex="1",
   };
   let menu = {
@@ -60,8 +60,6 @@ module Style = {
       ~backgroundColor=colorToHex(Dark),
       (),
     );
-  let control =
-    ReactDOM.Style.make(~display="flex", ~justifyContent="row-reverse", ());
 };
 module CustomStyle = {
   open Select;
@@ -79,16 +77,29 @@ module CustomStyle = {
           "1px solid var(--light-border-control-alpha, rgba(0, 0, 0, 0.20))",
       ),
   };
+  let customTheme = {
+    borderRadius: "0px 0px 3px 3px",
+    colors: {
+      primary: colorToHex(Hover),
+      primary25: colorToHex(Hover),
+    },
+    spacing: {
+      baseUnit: 5,
+      controlHeight: 50,
+      menuGutter: 1,
+    },
+  };
 };
 
 // module Option = {
+//   type data = {label: string, value: string};
 //   [@react.component]
-//   let make = (~data as {label}: CountryData.item) => {
-//     <div> <span className={"fi fi-" ++ label} /> </div>;
+//   let make = (~prop: data) => {
+//     <div> <span className={"fi fi-" ++ prop.label} />
+//     prop
+//      </div>;
 //   };
 // };
-// };
-// let components: Select.reactSelectComponents = {control: Dropdown.make};
 
 module Menu = {
   [@react.component]
@@ -100,13 +111,6 @@ module Blanket = {
   [@react.component]
   let make = (~onClick) => {
     <div style=Style.blanket onClick />;
-  };
-};
-
-module Control = {
-  [@react.component]
-  let make = (~children) => {
-    <div style=Style.control> children </div>;
   };
 };
 
@@ -159,7 +163,7 @@ let make = () => {
       components={
         dropdownIndicator: _ => <Search />,
         indicatorSeparator: false,
-        // control: <Control> React.null </Control>,
+        // option: _ => <Option> React.null </Control>,
       }
       multi=false
       name="Country Selector"
@@ -174,6 +178,7 @@ let make = () => {
       menuIsOpen=true
       placeholder="Search"
       tabSelectsValue=false
+      theme=CustomStyle.customTheme
       styles=CustomStyle.customStyle
       value={selectedCountry.label}
     />
