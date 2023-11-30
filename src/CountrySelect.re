@@ -44,11 +44,11 @@ module Style = {
 
   // Bring back blanket after fixing the dropdown
   let blanket = {
-    ReactDOM.Style.make// ~position="fixed",
-                       // ~bottom="0",
-                       // ~left="0",
-                       (); // ~right="0",
- // ~top="0",
+    ReactDOM.Style.make// ~left="0",
+                       // ~top="0",
+                       // ~right="0",
+                       (); // ~bottom="0",
+ // ~position="fixed",
                        // ~zIndex="1",
   };
   let menu = {
@@ -73,16 +73,9 @@ module CustomStyle = {
   open Select;
   let customStyle = {
     control: props =>
-      ReactDOMStyle.make(
+      ReactDOMStyle.combine(
         props,
-        ~display="flex",
-        ~flexDirection="row-reverse",
-        ~height="26px",
-        ~alignItems="center",
-        ~padding="0px 10px",
-        ~borderRadius="3px 3px 0px 0px",
-        ~border=
-          "1px solid var(--light-border-control-alpha, rgba(0, 0, 0, 0.20))",
+        ReactDOMStyle.make(~display="flex", ~flexDirection="row-reverse", ()),
       ),
   };
   let customTheme = {
@@ -93,25 +86,17 @@ module CustomStyle = {
     },
     spacing: {
       baseUnit: 5,
-      controlHeight: 50,
+      controlHeight: 0,
       menuGutter: 1,
     },
   };
 };
 
 module Option = {
-  type prop = {
-    children: React.element,
-    // isFocused: bool,
-    // isSelected: bool,
-    label: string,
-    data: item,
-  };
-
   [@react.component]
-  let make = (~prop: prop) => {
+  let make = (~children) => {
     <div>
-       <span className={"fi fi-" ++ prop.label} /> </div>;
+       <span className={"fi fi-" ++ "prop.label"} /> children </div>;
       // <div> {React.string(data.label)} </div>
   };
 };
