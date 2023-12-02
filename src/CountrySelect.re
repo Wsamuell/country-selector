@@ -29,6 +29,8 @@ module Style = {
       (),
     );
   let flag = ReactDOM.Style.make(~width="14px", ~height="14px", ());
+  let flagStyles =
+    ReactDOM.Style.make(~display="flex", ~flexDirection="row", ());
   let divPad =
     ReactDOM.Style.make(
       ~padding="4px",
@@ -44,11 +46,11 @@ module Style = {
 
   // Bring back blanket after fixing the dropdown
   let blanket = {
-    ReactDOM.Style.make// ~bottom="0",
+    ReactDOM.Style.make// ~position="fixed",
+                       // ~bottom="0",
                        // ~left="0",
-                       // ~top="0",
-                       (); // ~position="fixed",
- // ~right="0",
+                       (); // ~right="0",
+ // ~top="0",
                        // ~zIndex="1",
   };
   let menu = {
@@ -95,7 +97,7 @@ module CustomStyle = {
 module Option = {
   [@react.component]
   let make = (~internalProps, ~data) => {
-    <div>
+    <div style=Style.flagStyles>
       <span className={"fi fi-" ++ data.value} />
       <Option props=internalProps />
     </div>;
