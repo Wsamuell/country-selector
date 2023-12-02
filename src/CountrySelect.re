@@ -4,15 +4,6 @@ open Icons;
 open SharedStyle;
 
 module Style = {
-  let dropdown =
-    ReactDOM.Style.make(
-      ~position="relative",
-      ~width="230px",
-      ~height="429px",
-      ~fontFamily="Arial",
-      ~fontSize="14px",
-      (),
-    );
   let button =
     ReactDOM.Style.make(
       ~alignItems="center",
@@ -28,60 +19,46 @@ module Style = {
       ~padding="4px 10px",
       (),
     );
-  let flag = ReactDOM.Style.make(~width="14px", ~height="14px", ());
-
   let divPad =
     ReactDOM.Style.make(
+      ~maxWidth="150px",
+      ~overflow="hidden",
       ~padding="4px",
       ~textOverflow="ellipsis",
-      ~overflow="hidden",
-      ~maxWidth="150px",
       ~whiteSpace="nowrap",
       (),
     );
+  let dropdown =
+    ReactDOM.Style.make(
+      ~fontFamily="Arial",
+      ~fontSize="14px",
+      ~height="429px",
+      ~position="relative",
+      ~width="230px",
+      (),
+    );
+  let flag = ReactDOM.Style.make(~width="14px", ~height="14px", ());
+
   let icon = {
     ReactDOM.Style.make(~padding="3px", ());
   };
 
-  // Bring back blanket after fixing the dropdown
-  let blanket = {
-    ReactDOM.Style.make(
-      ~position="fixed",
-      ~bottom="0",
-      ~left="0",
-      ~right="0",
-      ~top="0",
-      ~zIndex="1",
-      (),
-    );
-  };
-  let menu = {
-    ReactDOM.Style.make(
-      ~position="absolute",
-      ~width="100%",
-      ~backgroundColor=colorToHex(Light),
-      ~borderRadius="4px",
-      ~boxShadow=
-        "0px 3px 18px 0px rgba(0, 0, 0, 0.15), 0px 0px 0px 1px rgba(0, 0, 0, 0.08);",
-      ~marginTop="4px",
-      ~zIndex="2",
-      (),
-    );
+  let search = {
+    ReactDOM.Style.make(~padding="6px", ~margin="5px 0px 0px 2px", ());
   };
 };
 module CustomStyle = {
-  open Select;
   let customStyle = {
     control: props =>
       ReactDOMStyle.combine(
         props,
         ReactDOMStyle.make(
+          ~borderBottomWidth="0px",
+          ~borderColor=colorToHex(Grey),
+          ~borderRadius="2px 2px 0px 0px",
+          ~borderWidth="1.5px",
           ~display="flex",
           ~flexDirection="row-reverse",
-          ~borderRadius="2px 2px 0px 0px",
-          ~borderColor=colorToHex(Grey),
-          ~borderBottomWidth="0px",
-          ~borderWidth="1.5px",
           ~padding="2px",
           (),
         ),
@@ -111,13 +88,13 @@ module Option = {
 
     let flagStyles =
       ReactDOM.Style.make(
-        ~display="flex",
-        ~flexDirection="row",
         ~alignItems="center",
-        ~justifyContent="space-between",
-        ~padding="0px 6px",
         ~backgroundClip="padding-box",
         ~backgroundColor="initial",
+        ~display="flex",
+        ~flexDirection="row",
+        ~justifyContent="space-between",
+        ~padding="0px 6px",
         (),
       );
 
@@ -144,12 +121,38 @@ module Option = {
 };
 
 module Menu = {
+  module Style = {
+    let menu = {
+      ReactDOM.Style.make(
+        ~backgroundColor=colorToHex(Light),
+        ~borderRadius="4px",
+        ~marginTop="4px",
+        ~position="absolute",
+        ~width="100%",
+        ~zIndex="2",
+        (),
+      );
+    };
+  };
   [@react.component]
   let make = (~children) => {
     <div style=Style.menu> children </div>;
   };
 };
 module Blanket = {
+  module Style = {
+    let blanket = {
+      ReactDOM.Style.make(
+        ~bottom="0",
+        ~left="0",
+        ~position="fixed",
+        ~right="0",
+        ~top="0",
+        ~zIndex="1",
+        (),
+      );
+    };
+  };
   [@react.component]
   let make = (~onClick) => {
     <div onClick style=Style.blanket />;
@@ -202,13 +205,19 @@ let make = () => {
     }>
     {active
        ? <Select
+           autoFocus=true
+           backspaceRemovesValue=false
            closeMenuOnSelect=true
            components={
-             dropdownIndicator: _ => <Search />,
+             dropdownIndicator: _ => <Search style=Style.search />,
              indicatorSeparator: false,
              option: ({data} as internalProps: Select.optionProps) =>
                <Option internalProps data />,
            }
+           controlShouldRenderValue=false
+           hideSelectedOptions=false
+           isClearable=false
+           menuIsOpen=true
            multi=false
            name="Country Selector"
            noOptionsMessage={_ => "Country Not Found!"}
@@ -217,16 +226,10 @@ let make = () => {
              setActive(_ => !active);
            }}
            options=countries
-           autoFocus=true
-           backspaceRemovesValue=false
-           controlShouldRenderValue=false
-           hideSelectedOptions=false
-           isClearable=false
-           menuIsOpen=true
            placeholder="Search"
+           styles=CustomStyle.customStyle
            tabSelectsValue=false
            theme=CustomStyle.customTheme
-           styles=CustomStyle.customStyle
            value={selectedCountry.label}
          />
        : React.null}

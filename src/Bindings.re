@@ -10,18 +10,6 @@ module Select = {
     option: optionProps => React.element,
   };
 
-  type styleSelectType = {
-    control: ReactDOMStyle.t => ReactDOMStyle.t,
-    menu: ReactDOMStyle.t => ReactDOMStyle.t,
-    // option: ReactDOMStyle.t => ReactDOMStyle.t,
-    // container: ReactDOMStyle.t => ReactDOMStyle.t,
-    // indicators: ReactDOMStyle.t => ReactDOMStyle.t,
-  };
-  type themeSelectType = {
-    colors: SharedStyle.themeColors,
-    spacing: SharedStyle.spacing,
-  };
-
   [@mel.module "react-select"] [@react.component]
   external make:
     (
@@ -40,9 +28,9 @@ module Select = {
       ~onChange: 'a => unit=?,
       ~options: array('a)=?,
       ~placeholder: string=?,
-      ~styles: styleSelectType=?,
+      ~styles: SharedStyle.styleSelectType=?,
       ~tabSelectsValue: bool=?,
-      ~theme: themeSelectType=?,
+      ~theme: SharedStyle.themeSelectType=?,
       ~value: string=?
     ) =>
     React.element =

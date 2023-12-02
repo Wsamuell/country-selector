@@ -1,11 +1,6 @@
 module App = {
   let style =
-    ReactDOM.Style.make(
-      ~display="flex",
-      ~justifyContent="center",
-      ~alignItems="center",
-      (),
-    );
+    ReactDOM.Style.make(~display="flex", ~justifyContent="center", ());
 
   [@react.component]
   [@react.component]

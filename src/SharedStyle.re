@@ -24,3 +24,12 @@ let colorToHex = (color: color) =>
   | Secondary => "#F2F2F2"
   | Hover => "#FFDBB3"
   };
+
+type styleSelectType = {
+  control: ReactDOMStyle.t => ReactDOMStyle.t,
+  menu: ReactDOMStyle.t => ReactDOMStyle.t,
+};
+type themeSelectType = {
+  colors: themeColors,
+  spacing,
+};
