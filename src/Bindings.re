@@ -45,4 +45,12 @@ module Select = {
     ) =>
     React.element =
     "default";
+
+  [@mel.scope "components"] [@mel.module "react-select"]
+  external makeOptionComponent: optionProps => React.element = "Option";
+};
+
+module Option = {
+  [@react.component]
+  let make = (~props) => props |> Select.makeOptionComponent;
 };

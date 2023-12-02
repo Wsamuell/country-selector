@@ -44,11 +44,11 @@ module Style = {
 
   // Bring back blanket after fixing the dropdown
   let blanket = {
-    ReactDOM.Style.make// ~left="0",
-                       // ~top="0",
-                       // ~right="0",
-                       (); // ~bottom="0",
- // ~position="fixed",
+    ReactDOM.Style.make// ~right="0",
+                       // ~position="fixed",
+                       // ~bottom="0",
+                       (); // ~top="0",
+ // ~left="0",
                        // ~zIndex="1",
   };
   let menu = {
@@ -94,10 +94,13 @@ module CustomStyle = {
 
 module Option = {
   [@react.component]
-  let make = (~children, ~data) => {
-    Js.log(data);
-    <div> <span className={"fi fi-" ++ data.value} /> children </div>;
-    // <div> {React.string(data.label)} </div>
+  let make = (~children as _, ~poop, ~data) => {
+    <div>
+
+        <span className={"fi fi-" ++ data.value} />
+        <Option props=poop />
+      </div>;
+      // <div> {React.string(data.label)} </div>
   };
 };
 
@@ -163,8 +166,8 @@ let make = () => {
       components={
         dropdownIndicator: _ => <Search />,
         indicatorSeparator: false,
-        option: ({children, data}: Select.optionProps) =>
-          <Option data> children </Option>,
+        option: ({children, data} as poop: Select.optionProps) =>
+          <Option poop data> children </Option>,
       }
       multi=false
       name="Country Selector"
