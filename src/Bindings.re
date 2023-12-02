@@ -18,8 +18,7 @@ module Select = {
     // indicators: ReactDOMStyle.t => ReactDOMStyle.t,
   };
   type themeSelectType = {
-    // borderRadius: string,
-    // colors: SharedStyle.themeColors,
+    colors: SharedStyle.themeColors,
     spacing: SharedStyle.spacing,
   };
 

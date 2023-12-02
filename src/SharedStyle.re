@@ -8,7 +8,7 @@ type color =
 
 type themeColors = {
   primary: string,
-  // primary25: string,
+  primary25: string,
 };
 type spacing = {
   baseUnit: int,

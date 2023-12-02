@@ -80,6 +80,7 @@ module CustomStyle = {
           ~flexDirection="row-reverse",
           ~borderRadius="2px 2px 0px 0px",
           ~borderColor=colorToHex(Grey),
+          ~borderBottomWidth="0px",
           ~borderWidth="1.5px",
           ~padding="2px",
           (),
@@ -92,11 +93,10 @@ module CustomStyle = {
       ),
   };
   let customTheme = {
-    // colors:
-    //   {
-    //   primary: colorToHex(Hover),
-    //     primary25: colorToHex(Hover),
-    //   },
+    colors: {
+      primary: colorToHex(Hover),
+      primary25: colorToHex(Hover),
+    },
     spacing: {
       baseUnit: 5,
       controlHeight: 0,
@@ -200,30 +200,35 @@ let make = () => {
         <Arrow style=Style.icon />
       </button>
     }>
-    <Select
-      closeMenuOnSelect=true
-      components={
-        dropdownIndicator: _ => <Search />,
-        indicatorSeparator: false,
-        option: ({data} as internalProps: Select.optionProps) =>
-          <Option internalProps data />,
-      }
-      multi=false
-      name="Country Selector"
-      noOptionsMessage={_ => "Country Not Found!"}
-      onChange={value => setSelectedCountry(_ => value)}
-      options=countries
-      autoFocus=true
-      backspaceRemovesValue=false
-      controlShouldRenderValue=false
-      hideSelectedOptions=false
-      isClearable=false
-      menuIsOpen=true
-      placeholder="Search"
-      tabSelectsValue=false
-      theme=CustomStyle.customTheme
-      styles=CustomStyle.customStyle
-      value={selectedCountry.label}
-    />
+    {active
+       ? <Select
+           closeMenuOnSelect=true
+           components={
+             dropdownIndicator: _ => <Search />,
+             indicatorSeparator: false,
+             option: ({data} as internalProps: Select.optionProps) =>
+               <Option internalProps data />,
+           }
+           multi=false
+           name="Country Selector"
+           noOptionsMessage={_ => "Country Not Found!"}
+           onChange={value => {
+             setSelectedCountry(_ => value);
+             setActive(_ => !active);
+           }}
+           options=countries
+           autoFocus=true
+           backspaceRemovesValue=false
+           controlShouldRenderValue=false
+           hideSelectedOptions=false
+           isClearable=false
+           menuIsOpen=true
+           placeholder="Search"
+           tabSelectsValue=false
+           theme=CustomStyle.customTheme
+           styles=CustomStyle.customStyle
+           value={selectedCountry.label}
+         />
+       : React.null}
   </Dropdown>;
 };
