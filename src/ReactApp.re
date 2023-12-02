@@ -1,7 +1,16 @@
 module App = {
+  let style =
+    ReactDOM.Style.make(
+      ~display="flex",
+      ~justifyContent="center",
+      ~alignItems="center",
+      (),
+    );
+
+  [@react.component]
   [@react.component]
   let make = () => {
-    <CountrySelect />;
+    <div style> <CountrySelect /> </div>;
   };
 };
 

@@ -115,14 +115,8 @@ module CustomStyle = {
 
 module Option = {
   module Style = {
-    let optionFlag =
-      ReactDOM.Style.make(
-        ~width="14%",
-        ~height="14px",
-        // ~marginRight="6px",
-        ~color="pink",
-        (),
-      );
+    let optionFlag = ReactDOM.Style.make(~width="14%", ~height="14px", ());
+
     let flagStyles =
       ReactDOM.Style.make(
         ~display="flex",
@@ -130,15 +124,25 @@ module Option = {
         ~alignItems="center",
         ~justifyContent="space-between",
         ~padding="0px 6px",
-        // ~backgroundColor=colorToHex(Hover),
-        // ~color="pink",
+        ~backgroundClip="padding-box",
+        ~backgroundColor="initial",
         (),
       );
+
+    let hoverStyles =
+      ReactDOM.Style.make(~backgroundColor=colorToHex(Hover), ());
+
+    let hoverFlagStyles = ReactDOM.Style.combine(flagStyles, hoverStyles);
   };
 
   [@react.component]
   let make = (~internalProps, ~data) => {
-    <div style=Style.flagStyles>
+    let (isHovered, setIsHovered) = React.useState(() => false);
+
+    <div
+      style={isHovered ? Style.hoverFlagStyles : Style.flagStyles}
+      onMouseOver={_ => setIsHovered(_ => true)}
+      onMouseOut={_ => setIsHovered(_ => false)}>
       <span className={"fi fi-" ++ data.value} style=Style.optionFlag />
       <Option props=internalProps />
     </div>;
@@ -154,7 +158,7 @@ module Menu = {
 module Blanket = {
   [@react.component]
   let make = (~onClick) => {
-    <div onClick />;
+    <div onClick style=Style.blanket />;
   };
 };
 
@@ -215,12 +219,12 @@ let make = () => {
       noOptionsMessage={_ => "Country Not Found!"}
       onChange={value => setSelectedCountry(_ => value)}
       options=countries
-      // autoFocus=true
+      autoFocus=true
       backspaceRemovesValue=false
       controlShouldRenderValue=false
       hideSelectedOptions=false
       isClearable=false
-      // menuIsOpen=true
+      menuIsOpen=true
       placeholder="Search"
       tabSelectsValue=false
       // theme=CustomStyle.customTheme
