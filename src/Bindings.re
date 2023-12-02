@@ -10,7 +10,11 @@ module Select = {
     option: optionProps => React.element,
   };
 
-  type styleSelectType = {control: ReactDOMStyle.t => ReactDOMStyle.t};
+  type styleSelectType = {
+    control: ReactDOMStyle.t => ReactDOMStyle.t,
+    menu: ReactDOMStyle.t => ReactDOMStyle.t,
+    container: ReactDOMStyle.t => ReactDOMStyle.t,
+  };
   type themeSelectType = {
     borderRadius: string,
     colors: SharedStyle.themeColors,

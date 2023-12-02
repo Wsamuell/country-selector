@@ -18,7 +18,7 @@ module Style = {
       ~alignItems="center",
       ~backgroundColor=colorToHex(Light),
       ~border=
-        "1px solid var(--light-border-control-alpha, rgba(0, 0, 0, 0.20))",
+        "1.5px solid var(--light-border-control-alpha, rgba(0, 0, 0, 0.20))",
       ~borderRadius="3px",
       ~columnGap="6px",
       ~display="flex",
@@ -29,8 +29,7 @@ module Style = {
       (),
     );
   let flag = ReactDOM.Style.make(~width="14px", ~height="14px", ());
-  let flagStyles =
-    ReactDOM.Style.make(~display="flex", ~flexDirection="row", ());
+
   let divPad =
     ReactDOM.Style.make(
       ~padding="4px",
@@ -46,20 +45,26 @@ module Style = {
 
   // Bring back blanket after fixing the dropdown
   let blanket = {
-    ReactDOM.Style.make// ~position="fixed",
-                       // ~bottom="0",
-                       // ~left="0",
-                       (); // ~right="0",
- // ~top="0",
-                       // ~zIndex="1",
+    ReactDOM.Style.make(
+      ~position="fixed",
+      ~bottom="0",
+      ~left="0",
+      ~right="0",
+      ~top="0",
+      ~zIndex="1",
+      (),
+    );
   };
   let menu = {
     ReactDOM.Style.make(
-      ~backgroundColor=colorToHex(Light),
-      ~marginTop="3px",
       ~position="absolute",
-      ~zIndex="2",
       ~width="100%",
+      ~backgroundColor=colorToHex(Light),
+      ~borderRadius="4px",
+      ~boxShadow=
+        "0px 3px 18px 0px rgba(0, 0, 0, 0.15), 0px 0px 0px 1px rgba(0, 0, 0, 0.08);",
+      ~marginTop="4px",
+      ~zIndex="2",
       (),
     );
   };
@@ -77,8 +82,22 @@ module CustomStyle = {
     control: props =>
       ReactDOMStyle.combine(
         props,
-        ReactDOMStyle.make(~display="flex", ~flexDirection="row-reverse", ()),
+        ReactDOMStyle.make(
+          ~display="flex",
+          ~flexDirection="row-reverse",
+          ~borderRadius="2px 2px 0px 0px",
+          ~borderColor=colorToHex(Grey),
+          ~borderWidth="1.5px",
+          ~padding="2px",
+          (),
+        ),
       ),
+    menu: props =>
+      ReactDOMStyle.combine(
+        props,
+        ReactDOMStyle.make(~borderRadius="0px 0px 2px 2px", ()),
+      ),
+    container: props => ReactDOMStyle.combine(props, ReactDOMStyle.make()),
   };
   let customTheme = {
     borderRadius: "0px 0px 3px 3px",
@@ -95,10 +114,32 @@ module CustomStyle = {
 };
 
 module Option = {
+  module Style = {
+    let optionFlag =
+      ReactDOM.Style.make(
+        ~width="14%",
+        ~height="14px",
+        // ~marginRight="6px",
+        ~color="pink",
+        (),
+      );
+    let flagStyles =
+      ReactDOM.Style.make(
+        ~display="flex",
+        ~flexDirection="row",
+        ~alignItems="center",
+        ~justifyContent="space-between",
+        ~padding="0px 6px",
+        // ~backgroundColor=colorToHex(Hover),
+        // ~color="pink",
+        (),
+      );
+  };
+
   [@react.component]
   let make = (~internalProps, ~data) => {
     <div style=Style.flagStyles>
-      <span className={"fi fi-" ++ data.value} />
+      <span className={"fi fi-" ++ data.value} style=Style.optionFlag />
       <Option props=internalProps />
     </div>;
   };
@@ -113,7 +154,7 @@ module Menu = {
 module Blanket = {
   [@react.component]
   let make = (~onClick) => {
-    <div style=Style.blanket onClick />;
+    <div onClick />;
   };
 };
 
@@ -174,15 +215,15 @@ let make = () => {
       noOptionsMessage={_ => "Country Not Found!"}
       onChange={value => setSelectedCountry(_ => value)}
       options=countries
-      autoFocus=true
+      // autoFocus=true
       backspaceRemovesValue=false
       controlShouldRenderValue=false
       hideSelectedOptions=false
       isClearable=false
-      menuIsOpen=true
+      // menuIsOpen=true
       placeholder="Search"
       tabSelectsValue=false
-      theme=CustomStyle.customTheme
+      // theme=CustomStyle.customTheme
       styles=CustomStyle.customStyle
       value={selectedCountry.label}
     />
