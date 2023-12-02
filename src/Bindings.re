@@ -1,8 +1,5 @@
 module Select = {
-  type optionProps = {
-    children: React.element,
-    data: CountryData.item,
-  };
+  type optionProps = {data: CountryData.item};
 
   type reactSelectComponents = {
     [@mel.as "DropdownIndicator"]
