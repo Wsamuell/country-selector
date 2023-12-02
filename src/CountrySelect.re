@@ -94,10 +94,10 @@ module CustomStyle = {
 
 module Option = {
   [@react.component]
-  let make = (~children) => {
-    <div>
-       <span className={"fi fi-" ++ "prop.label"} /> children </div>;
-      // <div> {React.string(data.label)} </div>
+  let make = (~children, ~data) => {
+    Js.log(data);
+    <div> <span className={"fi fi-" ++ data.value} /> children </div>;
+    // <div> {React.string(data.label)} </div>
   };
 };
 
@@ -163,7 +163,8 @@ let make = () => {
       components={
         dropdownIndicator: _ => <Search />,
         indicatorSeparator: false,
-        option: ({children, _}: Select.optionProps) => <div> children </div>,
+        option: ({children, data}: Select.optionProps) =>
+          <Option data> children </Option>,
       }
       multi=false
       name="Country Selector"
