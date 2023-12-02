@@ -68,13 +68,6 @@ module Style = {
       (),
     );
   };
-
-  let theme =
-    ReactDOM.Style.make(
-      ~borderRadius="0px",
-      ~backgroundColor=colorToHex(Dark),
-      (),
-    );
 };
 module CustomStyle = {
   open Select;
@@ -97,18 +90,17 @@ module CustomStyle = {
         props,
         ReactDOMStyle.make(~borderRadius="0px 0px 2px 2px", ()),
       ),
-    container: props => ReactDOMStyle.combine(props, ReactDOMStyle.make()),
   };
   let customTheme = {
-    borderRadius: "0px 0px 3px 3px",
-    colors: {
-      primary: colorToHex(Hover),
-      primary25: colorToHex(Hover),
-    },
+    // colors:
+    //   {
+    //   primary: colorToHex(Hover),
+    //     primary25: colorToHex(Hover),
+    //   },
     spacing: {
       baseUnit: 5,
       controlHeight: 0,
-      menuGutter: 1,
+      menuGutter: 2,
     },
   };
 };
@@ -133,6 +125,7 @@ module Option = {
       ReactDOM.Style.make(~backgroundColor=colorToHex(Hover), ());
 
     let hoverFlagStyles = ReactDOM.Style.combine(flagStyles, hoverStyles);
+    let unknownNumber = ReactDOM.Style.make(~color=colorToHex(Dark), ());
   };
 
   [@react.component]
@@ -145,6 +138,7 @@ module Option = {
       onMouseOut={_ => setIsHovered(_ => false)}>
       <span className={"fi fi-" ++ data.value} style=Style.optionFlag />
       <Option props=internalProps />
+      <div style=Style.unknownNumber> {React.string("0")} </div>
     </div>;
   };
 };
@@ -227,7 +221,7 @@ let make = () => {
       menuIsOpen=true
       placeholder="Search"
       tabSelectsValue=false
-      // theme=CustomStyle.customTheme
+      theme=CustomStyle.customTheme
       styles=CustomStyle.customStyle
       value={selectedCountry.label}
     />

@@ -8,7 +8,7 @@ type color =
 
 type themeColors = {
   primary: string,
-  primary25: string,
+  // primary25: string,
 };
 type spacing = {
   baseUnit: int,
@@ -18,7 +18,7 @@ type spacing = {
 let colorToHex = (color: color) =>
   switch (color) {
   | Light => "#FFFFFF"
-  | Dark => "#000000"
+  | Dark => "#333333"
   | Grey => "#E5E5E5"
   | Primary => "#F2F2F2"
   | Secondary => "#F2F2F2"
