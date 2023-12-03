@@ -73,7 +73,7 @@ module CustomStyle = {
   };
   let customTheme = {
     colors: {
-      primary: "initial",
+      primary: colorToHex(Grey),
       primary25: colorToHex(Hover),
       neutral50: colorToHex(Grey),
       neutral80: colorToHex(Dark),
@@ -130,7 +130,6 @@ module Menu = {
       ReactDOM.Style.make(
         ~borderRadius="4px",
         ~marginTop="3px",
-        ~marginLeft="1px",
         ~position="absolute",
         ~width="100%",
         ~zIndex="2",
