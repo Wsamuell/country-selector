@@ -75,7 +75,7 @@ module CustomStyle = {
       primary25: colorToHex(Hover),
     },
     spacing: {
-      baseUnit: 5,
+      baseUnit: 3,
       controlHeight: 0,
       menuGutter: 2,
     },
@@ -102,7 +102,8 @@ module Option = {
       ReactDOM.Style.make(~backgroundColor=colorToHex(Hover), ());
 
     let hoverFlagStyles = ReactDOM.Style.combine(flagStyles, hoverStyles);
-    let unknownNumber = ReactDOM.Style.make(~color=colorToHex(Dark), ());
+    let unknownNumber =
+      ReactDOM.Style.make(~color=colorToHex(Dark), ~opacity="0.6", ());
   };
 
   [@react.component]
