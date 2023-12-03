@@ -4,16 +4,19 @@ type color =
   | Grey
   | Primary
   | Secondary
-  | Hover;
+  | Hover
+  | TesterColor;
 
 type themeColors = {
-  primary: string,
-  primary25: string,
+  primary: string, //outlinebox color
+  primary25: string, // menu onHover or onSelcected color
+  neutral50: string, // placeholder text color
+  neutral80: string // input text color
 };
+
 type spacing = {
   baseUnit: int,
   controlHeight: int,
-  menuGutter: int,
 };
 let colorToHex = (color: color) =>
   switch (color) {
@@ -23,6 +26,7 @@ let colorToHex = (color: color) =>
   | Primary => "#F2F2F2"
   | Secondary => "#F2F2F2"
   | Hover => "#FFDBB3"
+  | TesterColor => "#79FF9A"
   };
 
 type styleSelectType = {

@@ -59,7 +59,9 @@ module CustomStyle = {
           ~borderWidth="1.5px",
           ~display="flex",
           ~flexDirection="row-reverse",
+          ~outlineColor="pink",
           ~padding="2px",
+          ~width="100%",
           (),
         ),
       ),
@@ -71,20 +73,21 @@ module CustomStyle = {
   };
   let customTheme = {
     colors: {
-      primary: colorToHex(Hover),
+      primary: "initial",
       primary25: colorToHex(Hover),
+      neutral50: colorToHex(Grey),
+      neutral80: colorToHex(Dark),
     },
     spacing: {
-      baseUnit: 3,
-      controlHeight: 0,
-      menuGutter: 2,
+      baseUnit: 2,
+      controlHeight: 11,
     },
   };
 };
 
 module Option = {
   module Style = {
-    let optionFlag = ReactDOM.Style.make(~width="14%", ~height="14px", ());
+    let optionFlag = ReactDOM.Style.make(~width="8%", ~height="14px", ());
 
     let flagStyles =
       ReactDOM.Style.make(
@@ -103,7 +106,7 @@ module Option = {
 
     let hoverFlagStyles = ReactDOM.Style.combine(flagStyles, hoverStyles);
     let unknownNumber =
-      ReactDOM.Style.make(~color=colorToHex(Dark), ~opacity="0.6", ());
+      ReactDOM.Style.make(~color=colorToHex(Dark), ~opacity="0.5", ());
   };
 
   [@react.component]
@@ -125,9 +128,9 @@ module Menu = {
   module Style = {
     let menu = {
       ReactDOM.Style.make(
-        ~backgroundColor=colorToHex(Light),
         ~borderRadius="4px",
-        ~marginTop="4px",
+        ~marginTop="3px",
+        ~marginLeft="1px",
         ~position="absolute",
         ~width="100%",
         ~zIndex="2",
