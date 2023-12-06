@@ -3,6 +3,7 @@ open CountryData;
 open Icons;
 open SharedStyle;
 
+// I know using ReactDOM.Style is not the best way to do this, but I am not sure how to do it in a better way. Especially in Melange. It doesnt guarantee type safety since it only uses strings. I am open to suggestions on how to improve this.
 module Style = {
   let button =
     ReactDOM.Style.make(
@@ -44,7 +45,7 @@ module Style = {
   };
 
   let search = {
-    ReactDOM.Style.make(~padding="6px", ~margin="5px 0px 0px 2px", ());
+    ReactDOM.Style.make(~padding="6px", ~margin="5px 0px 2px 5px", ());
   };
 };
 module CustomStyle = {
@@ -59,7 +60,7 @@ module CustomStyle = {
           ~borderWidth="1.1px",
           ~flexDirection="row-reverse",
           ~margin="-1.1px",
-          ~padding="2px",
+          ~padding="0px",
           ~width="101%",
           (),
         ),
@@ -106,6 +107,7 @@ module Option = {
     let unknownNumber =
       ReactDOM.Style.make(~color=colorToHex(Dark), ~opacity="0.5", ());
   };
+  // Currently there is an issue where im not able to spread the props so the hover styles are not being applied. I will fix this in the next release.
 
   [@react.component]
   let make = (~internalProps, ~data) => {
