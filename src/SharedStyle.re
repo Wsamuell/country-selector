@@ -8,7 +8,6 @@ type color =
   | TesterColor;
 
 type themeColors = {
-  primary: string, //outlinebox color
   primary25: string, // menu onHover or onSelcected color
   neutral50: string, // placeholder text color
   neutral80: string // input text color

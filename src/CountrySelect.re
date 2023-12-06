@@ -56,12 +56,11 @@ module CustomStyle = {
           ~borderBottomWidth="0px",
           ~borderColor=colorToHex(Grey),
           ~borderRadius="2px 2px 0px 0px",
-          ~borderWidth="1.5px",
-          ~display="flex",
+          ~borderWidth="1.1px",
           ~flexDirection="row-reverse",
-          ~outlineColor="pink",
+          ~margin="-1.1px",
           ~padding="2px",
-          ~width="100%",
+          ~width="101%",
           (),
         ),
       ),
@@ -73,7 +72,6 @@ module CustomStyle = {
   };
   let customTheme = {
     colors: {
-      primary: colorToHex(Grey),
       primary25: colorToHex(Hover),
       neutral50: colorToHex(Grey),
       neutral80: colorToHex(Dark),
