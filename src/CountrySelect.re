@@ -95,7 +95,7 @@ module Option = {
         ~display="flex",
         ~flexDirection="row",
         ~justifyContent="space-between",
-        ~padding="0px 6px",
+        ~padding="0px 10px",
         (),
       );
 
