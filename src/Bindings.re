@@ -5,6 +5,7 @@ module Select = {
     isFocused: bool,
   };
 
+  //  Read BS BlahBlah to help figure out how to rename fields since each prop can't start with a capital letter
   type reactSelectComponents = {
     [@mel.as "DropdownIndicator"]
     dropdownIndicator: unit => React.element,
@@ -40,6 +41,7 @@ module Select = {
     React.element =
     "default";
 
+  // This is a hack to get around the fact that the react-select library doesn't export the Option component: hench more Bs Blah Blah
   [@mel.scope "components"] [@mel.module "react-select"]
   external makeOptionComponent: optionProps => React.element = "Option";
 };

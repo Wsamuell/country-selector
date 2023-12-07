@@ -4,6 +4,7 @@ type item = {
   label: string,
   value: string,
 };
+// Melange Json for decode
 let decodeItem = json => {
   Json.Decode.{
     label: json |> field("label", string),

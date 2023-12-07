@@ -181,6 +181,7 @@ let make = () => {
     React.useState(() => countryLoadState(None));
   let (selectedCountry, setSelectedCountry) =
     React.useState(() => {label: "Select A country", value: "xx"});
+  // melange fetch to load the country data on page render
   React.useEffect1(
     () => {
       let _ =

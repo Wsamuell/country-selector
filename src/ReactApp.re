@@ -3,7 +3,6 @@ module App = {
     ReactDOM.Style.make(~display="flex", ~justifyContent="center", ());
 
   [@react.component]
-  [@react.component]
   let make = () => {
     <div style> <CountrySelect /> </div>;
   };
