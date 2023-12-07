@@ -19,5 +19,6 @@ let countryLoadState: option(array(item)) => array(item) =
 let decode = json =>
   json
   ->Js.Json.decodeArray
+  // ensures safety in the case we dont get values back
   ->Belt.Option.getExn
   ->Belt.Array.map(item => item |> decodeItem);

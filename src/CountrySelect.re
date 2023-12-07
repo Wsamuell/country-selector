@@ -119,6 +119,7 @@ module Option = {
       onMouseOut={_ => setIsHovered(_ => false)}>
       <span className={"fi fi-" ++ data.value} style=Style.optionFlag />
       <Option props=internalProps />
+      // This is just sticking 0 to each option for now since there is no given instruction on what the right numbers are in the figma file.
       <div style=Style.unknownNumber> {React.string("0")} </div>
     </div>;
   };
@@ -128,7 +129,8 @@ module Menu = {
   module Style = {
     let menu = {
       ReactDOM.Style.make(
-        ~borderRadius="4px",
+        ~borderRadius="0px",
+        ~boxShadow="inset 0 0 0 rgba(0, 0, 0, 0.1)",
         ~marginTop="3px",
         ~position="absolute",
         ~width="100%",
