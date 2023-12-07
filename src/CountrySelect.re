@@ -107,7 +107,7 @@ module Option = {
     let unknownNumber =
       ReactDOM.Style.make(~color=colorToHex(Dark), ~opacity="0.5", ());
   };
-  // Currently there is an issue where im not able to spread the props so the hover styles are not being applied. I will fix this in the next release.
+  // Currently there is an issue where im not able to spread the props so the hover styles are not being applied. when you use the keyboard or hover the flag
 
   [@react.component]
   let make = (~internalProps, ~data) => {
