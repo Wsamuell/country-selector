@@ -1,5 +1,9 @@
 module Select = {
-  type optionProps = {data: CountryData.item};
+  type optionProps = {
+    data: CountryData.item,
+    innerRef: ReactDOM.domRef,
+    isFocused: bool,
+  };
 
   type reactSelectComponents = {
     [@mel.as "DropdownIndicator"]

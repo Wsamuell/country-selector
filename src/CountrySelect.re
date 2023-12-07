@@ -109,14 +109,13 @@ module Option = {
   };
   // Currently there is an issue where im not able to spread the props so the hover styles are not being applied. when you use the keyboard or hover the flag
 
-  [@react.component]
-  let make = (~internalProps, ~data) => {
-    let (isHovered, setIsHovered) = React.useState(() => false);
+  //fix: the isFocused prop can be used to apply the hover styles but this doesnt fix the fact that you cant click on the flag or number to select the option.
 
+  [@react.component]
+  let make = (~internalProps, ~data, ~innerRef, ~isFocused) => {
     <div
-      style={isHovered ? Style.hoverFlagStyles : Style.flagStyles}
-      onMouseOver={_ => setIsHovered(_ => true)}
-      onMouseOut={_ => setIsHovered(_ => false)}>
+      ref=innerRef
+      style={isFocused ? Style.hoverFlagStyles : Style.flagStyles}>
       <span className={"fi fi-" ++ data.value} style=Style.optionFlag />
       <Option props=internalProps />
       // This is just sticking 0 to each option for now since there is no given instruction on what the right numbers are in the figma file.
@@ -216,8 +215,11 @@ let make = () => {
            components={
              dropdownIndicator: _ => <Search style=Style.search />,
              indicatorSeparator: false,
-             option: ({data} as internalProps: Select.optionProps) =>
-               <Option internalProps data />,
+             option:
+               (
+                 {data, innerRef, isFocused} as internalProps: Select.optionProps,
+               ) =>
+               <Option internalProps data innerRef isFocused />,
            }
            controlShouldRenderValue=false
            hideSelectedOptions=false

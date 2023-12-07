@@ -8,7 +8,7 @@ type color =
   | TesterColor;
 
 type themeColors = {
-  primary25: string, // menu onHover or onSelcected color
+  primary25: string, // menu onHover or onSelected color
   neutral50: string, // placeholder text color
   neutral80: string // input text color
 };
